@@ -6,7 +6,7 @@ class Day(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
 
         self.update()
-        wid = (self.winfo_screenwidth()-550)/7 # 550 is width of other two sections combined
+        wid = (self.winfo_screenwidth()-600)/7 # 550 is width of other two sections combined + 50 time
         hei = self.winfo_screenheight()
 
         self.label = customtkinter.CTkLabel(self)
@@ -15,9 +15,14 @@ class Day(customtkinter.CTkFrame):
 
         self.label.grid(row=0, column=0, padx=10, pady = 300) 
 
-        self.textbox = customtkinter.CTkTextbox(master=self, width=0, corner_radius=0)
+        self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0)
         self.textbox.grid(row=0, column=0, sticky="new") # sticky = nsew
-        self.textbox.insert("0.0", date)
+        
+        self.textbox.tag_config("center", justify="center")
+        self.textbox.insert("0.0", str(day) + " " + str(date))
+        
+        
+
 
         self.pack()
 
