@@ -1,18 +1,26 @@
 import tkinter
 import customtkinter
 
-mainwindow = customtkinter.CTk()
-mainwindow._set_appearance_mode("System")
-mainwindow.geometry("600x400")
+class App(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
 
-ai_chat_section = customtkinter.CTkFrame(master = mainwindow, width = 500, fg_color="white")
-ai_chat_section.pack(side = "right", fill = "y")
+        self.title = "Calendar App"
+        self._set_appearance_mode("System")
+        self.geometry("600x400")
 
-event_info_section = customtkinter.CTkFrame(master = mainwindow, width = 300, fg_color="blue")
-event_info_section.pack(side="left", fill='y')
+        self.ai_chat_section = customtkinter.CTkFrame(master = self, width = 500, fg_color="white")
+        self.ai_chat_section.pack(side = "right", fill = "y")
 
-calendar_section = customtkinter.CTkFrame(master = mainwindow, fg_color= "green")
-calendar_section.pack(fill = "both", expand=True)
+        self.event_info_section = customtkinter.CTkFrame(master = self, width = 300, fg_color="blue")
+        self.event_info_section.pack(side="left", fill='y')
+
+        self.calendar_section = customtkinter.CTkFrame(master = self, fg_color= "green")
+        self.calendar_section.pack(fill = "both", expand=True)
+
+app = App()
+app.mainloop()
+
 
 #Chris
 #########################################################################
