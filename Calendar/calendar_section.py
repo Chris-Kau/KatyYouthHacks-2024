@@ -8,8 +8,6 @@ class CalendarSection(ctk.CTkFrame):
         super().__init__(master, **kwargs)
         
         hei = self.winfo_screenheight()
-        # square = ctk.CTkFrame(self, width=50, height=50)
-        # square.pack(side="top")
 
 
         # time of day ----------------------------
@@ -31,7 +29,7 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        label = ctk.CTkLabel(self.time, height=50)
+        label = ctk.CTkLabel(self.time, height=50, text="") # square top left
         label.pack(side="top")
         for time in times_list:
             label = ctk.CTkLabel(self.time, text=time, height=(hei-50)/26)

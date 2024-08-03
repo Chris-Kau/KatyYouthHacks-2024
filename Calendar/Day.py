@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 import customtkinter
 from Calendar.Event import Event
 class Day(customtkinter.CTkFrame):
@@ -17,11 +17,12 @@ class Day(customtkinter.CTkFrame):
 
 
         # the top (day and date) ---
-        self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0)
-        self.textbox.grid(row=0, column=0, sticky="new") # sticky = nsew
-        
-        self.textbox.tag_config("center", justify="center")
-        self.textbox.insert("0.0", str(day) + " " + str(date))
+        # self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 16))
+        self.label = customtkinter.CTkLabel(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 18))
+
+
+        self.label.grid(row=0, column=0, sticky="new") # sticky = nsew
+        self.label.configure(text=str(day) + " " + str(date))
 
 
 
