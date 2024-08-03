@@ -2,7 +2,7 @@ import tkinter
 import customtkinter
 from Calendar.Event import Event
 class Day(customtkinter.CTkFrame):
-    def __init__(self, master, day, col, **kwargs): # title, time, desc, 
+    def __init__(self, master, day, date, **kwargs): # title, time, desc, 
         super().__init__(master, **kwargs)
 
         self.update()
@@ -11,14 +11,15 @@ class Day(customtkinter.CTkFrame):
 
         self.label = customtkinter.CTkLabel(self)
         self.label.configure(text = day)
-        self.label.configure(width = wid-19, height = hei-600)
+        self.label.configure(width=wid-19, height=hei-600)
 
         self.label.grid(row=0, column=0, padx=10, pady = 300) 
-        # self.grid_columnconfigure(col, weight=col)
-        
+
+        self.textbox = customtkinter.CTkTextbox(master=self, width=0, corner_radius=0)
+        self.textbox.grid(row=0, column=0, sticky="new") # sticky = nsew
+        self.textbox.insert("0.0", date)
 
         self.pack()
-
 
         # self.day = Event(self, title, time, desc)
         # self.day.pack()
