@@ -8,14 +8,14 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title = "Calendar App"
+        self.title = "Calendar App!!"
         self._set_appearance_mode("System")
-        self.geometry("600x400")
+        self.geometry("1200x800")
 
-        self.ai_chat_section = AiChatSection(master = self, width = 500, fg_color = "white")
+        self.ai_chat_section = AiChatSection(master = self, width = 300, height = 1000, fg_color = "white")
         self.ai_chat_section.pack(side = "right", fill = "both")
 
-        self.event_info_section = EventInfoSection(master = self, width = 300, fg_color="blue")
+        self.event_info_section = EventInfoSection(master = self, width = 250, fg_color="blue")
         self.event_info_section.pack(side = "left", fill = "both")
 
         self.calendar_section = CalendarSection(master = self, fg_color= "green")
