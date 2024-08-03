@@ -11,11 +11,12 @@ class Conversation(customtkinter.CTkFrame):
         self.update_text("bloooo", "ai")
         self.update_text("blahhhhh", "Chris")
         self.update_text("bliiiiih", "ai")
-    
+        self.conversationbox.configure(state="disabled")
     def get_text(self):
         return self.conversationbox.get("0.0", "end")
     
     def update_text(self, newtext, user):
+        self.conversationbox.configure(state="normal")
         last_line = self.conversationbox.index("end-1c linestart")
         self.conversationbox.insert(f"{last_line}", f"{user}: {newtext} \n\n")
-        return self.conversationbox.index("end-1c linestart")
+        self.conversationbox.configure(state="disabled")
