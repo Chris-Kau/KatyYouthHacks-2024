@@ -2,29 +2,49 @@ import tkinter
 import customtkinter as ctk
 from Calendar.Day import Day
 from datetime import datetime, timedelta
+import calendar
 
 class CalendarSection(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        
+        wid = self.winfo_screenwidth()-550 # 550 is width of other two sections combined
         hei = self.winfo_screenheight()
+
+        # month/year -------------
+        def get_current_week_months_and_year():
+            # Get the current date
+            today = datetime.today()
+            # Calculate the start and end of the current week
+            start_of_week = today - timedelta(days=today.weekday())  # Monday
+            end_of_week = start_of_week + timedelta(days=6)  # Sunday
+            # Get months from the start and end of the week
+            months = {calendar.month_name[start_of_week.month], calendar.month_name[end_of_week.month]}
+            # Get the current year
+            current_year = today.year
+            return sorted(months), current_year
+        months, year = get_current_week_months_and_year()
+        monthsstr = '-'.join(months)
+
+        self.monthyr = ctk.CTkFrame(master=self, height=40)
+        self.monthyr.pack(side="top", fill = "both", expand = True)
+        myLbl = ctk.CTkLabel(self.monthyr, text=monthsstr + " " + str(year), width=wid, font=("Arial", 20))
+        myLbl.pack(fill = "both", expand = True)
+
 
 
         # time of day ----------------------------
-        self.time = ctk.CTkFrame(master=self, width=50, height=hei)
+        self.time = ctk.CTkFrame(master=self, width=50, height=hei, corner_radius=0)
         self.time.pack(side = "left")
 
         def get_times_list():
             times = []
             # Start from 12:00 AM
             current_time = datetime.strptime("12:00 AM", "%I:%M %p")
-            
             # Collect times in a 24-hour period
             for _ in range(24):
                 times.append(current_time.strftime("%I:%M %p"))
                 # Move to the next hour
                 current_time += timedelta(hours=1)
-            
             return times
         
         times_list = get_times_list()
@@ -32,7 +52,7 @@ class CalendarSection(ctk.CTkFrame):
         label = ctk.CTkLabel(self.time, height=50, text="") # square top left
         label.pack(side="top")
         for time in times_list:
-            label = ctk.CTkLabel(self.time, text=time, height=(hei-50)/26)
+            label = ctk.CTkLabel(self.time, text=time, height=(hei-80)/26)
             label.pack(fill = "both", expand = True)
 
 
