@@ -9,19 +9,20 @@ class Day(customtkinter.CTkFrame):
         wid = (self.winfo_screenwidth()-600)/7 # 550 is width of other two sections combined + 50 time
         hei = self.winfo_screenheight()
 
-        self.label = customtkinter.CTkLabel(self)
-        self.label.configure(text = day)
-        self.label.configure(width=wid-19, height=hei-600)
+        # the (7) boxes of days
+        self.frame = customtkinter.CTkFrame(self, border_width=1, border_color="gray50")
+        # self.frame.configure(text = day)
+        self.frame.configure(width=wid, height=hei)
+        self.frame.grid(row=0, column=0, padx=0, pady=0) 
 
-        self.label.grid(row=0, column=0, padx=10, pady = 300) 
 
+        # the top (day and date) ---
         self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0)
         self.textbox.grid(row=0, column=0, sticky="new") # sticky = nsew
         
         self.textbox.tag_config("center", justify="center")
         self.textbox.insert("0.0", str(day) + " " + str(date))
-        
-        
+
 
 
         self.pack()
