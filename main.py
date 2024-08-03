@@ -8,7 +8,7 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title = "Calendar App"
+        self.title = "Calendar App!!"
         self._set_appearance_mode("System")
         self.geometry("1200x800")
 
