@@ -5,4 +5,4 @@ class UserMessage(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
         self.pack(side = "bottom")
         textbox = customtkinter.CTkTextbox(self, width = 250, height = 50, fg_color="grey")
-        textbox.pack(fill = "both", expand = True)
+        textbox.pack(fill = "both")
