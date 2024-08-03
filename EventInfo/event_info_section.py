@@ -9,22 +9,41 @@ class EventInfoSection(customtkinter.CTkFrame):
         self.input_frame = customtkinter.CTkFrame(self, height=400, bg_color="transparent", fg_color="green")
         self.input_frame.pack(fill="x")
 
-        self.name_frame = customtkinter.CTkFrame(self.input_frame, fg_color="orange", height=100)
+        self.name_frame = customtkinter.CTkFrame(self.input_frame, fg_color="transparent", height=100)
         self.name_frame.pack(fill="x")
         self.name_label = customtkinter.CTkLabel(self.name_frame, text="Event/Task:")
         self.name_label.pack()
         self.name_input = customtkinter.CTkEntry(self.name_frame, placeholder_text="Event/Tasks Name", justify="left")
         self.name_input.pack()
 
-        self.date_frame = customtkinter.CTkFrame(self.input_frame, fg_color="brown", height=100)
+        self.date_frame = customtkinter.CTkFrame(self.input_frame, fg_color="transparent", height=100)
         self.date_frame.pack(fill="x")
         self.date_label = customtkinter.CTkLabel(self.date_frame, text="Date:")
         self.date_label.pack()
         self.date_input = customtkinter.CTkEntry(self.date_frame, placeholder_text="mm/dd/yy")
         self.date_input.pack()
 
-        self.date_time = customtkinter.CTkFrame(self.input_frame, fg_color="orange", height=100)
-        self.date_time.pack(fill="x")        
+        self.time_frame = customtkinter.CTkFrame(self.input_frame, fg_color="transparent", height=100)
+        self.time_frame.pack(fill="x")
+        self.time_label = customtkinter.CTkLabel(self.time_frame, text="Time:")
+        self.time_label.pack()
+        self.hour_minute_frame = customtkinter.CTkFrame(self.time_frame, fg_color="transparent")
+        self.hour_minute_frame.pack(fill="x")
+        self.hour_label = customtkinter.CTkLabel(self.hour_minute_frame, text="Hour: ")
+        self.hour_label.pack(side="left", padx=10)
+        self.hour_input = customtkinter.CTkComboBox(self.hour_minute_frame, values=[f"{x}" for x in range(1, 13)], width=60)
+        self.hour_input.pack(side="left")
+        self.minute_label = customtkinter.CTkLabel(self.hour_minute_frame, text="Minute: ")
+        self.minute_label.pack(side="left", padx=10)
+        
+
+        self.minute_input = customtkinter.CTkComboBox(self.hour_minute_frame, values=[f"{x}" for x in range(5, 60, 5)], width=60)
+        self.minute_input.pack(side="left")
+
+        
+
+
+
 
 
     def create_event(self):
