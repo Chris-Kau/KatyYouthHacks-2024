@@ -10,7 +10,7 @@ class App(customtkinter.CTk):
 
         self.title = "Calendar App"
         self._set_appearance_mode("System")
-        self.geometry("600x400")
+        self.geometry("1200x800")
 
         self.ai_chat_section = AiChatSection(master = self, width = 500, fg_color = "white")
         self.ai_chat_section.pack(side = "right", fill = "both")
