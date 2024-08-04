@@ -27,7 +27,10 @@ class CalendarSection(ctk.CTkFrame):
             current_year = today.year
             return months, current_year
         months, year = get_current_week_months_and_year()
-        monthsstr = '-'.join(months)
+        if(months[0] == months[1]):
+            monthsstr = months[0]
+        else:
+            monthsstr = '-'.join(months)
         print(months)
         print(monthsstr)
 
@@ -67,8 +70,8 @@ class CalendarSection(ctk.CTkFrame):
 
         
         # SCROLLLLL -----------------------
-        self.events_holder = ctk.CTkScrollableFrame(self, width=wid, fg_color = "blue")
-        self.events_holder.pack(fill = "both", expand = True)
+        self.events_holder = ctk.CTkScrollableFrame(self, width=wid, height=650, fg_color = "gray80")
+        self.events_holder.pack(side="top", fill = "both", expand = True)
 
 
          # time of day ----------------------------
@@ -89,9 +92,6 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="white") # square top left ------------------
-        squareframe.pack(side="top")
-
         for time in times_list:
             frame = ctk.CTkFrame(self.time, height=(hei-90)/28, width=50, corner_radius=0, border_width=0.5, fg_color="#f2f2f2")
             label = ctk.CTkLabel(frame, text=time, font=("Arial", 12))
