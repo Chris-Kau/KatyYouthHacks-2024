@@ -21,11 +21,7 @@ class Day(customtkinter.CTkFrame):
         
 
         # the top (day and date) --------------
-        # self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 16))
-        self.label = customtkinter.CTkLabel(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 18), fg_color="white")
-
-        self.label.grid(row=0, column=0, sticky="new") # sticky = nsew
-        self.label.configure(text=str(day) + " " + str(date))
+        # moved line 54 calendar_section
 
         # # the hours -----------------------------
         # block = customtkinter.CTkFrame(self.frame, height=50, fg_color="red", bg_color="red") # CORRECTLY covering the part thats the day titling

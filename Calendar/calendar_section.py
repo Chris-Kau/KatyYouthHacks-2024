@@ -35,10 +35,6 @@ class CalendarSection(ctk.CTkFrame):
         self.monthyr.pack(side="top", fill = "both", expand = True)
         myLbl = ctk.CTkLabel(self.monthyr, text=monthsstr + " " + str(year), width=wid, font=("Arial", 20), fg_color="white")
         myLbl.pack(fill = "both", expand = True)
-
-
-        # time of day ----------------------------
-        self.time = ctk.CTkFrame(master=self, width=50, height=hei-40, corner_radius=0)
       
 
         # days of week ----------------
@@ -53,33 +49,28 @@ class CalendarSection(ctk.CTkFrame):
         today = datetime.now().date()
         start = today - timedelta(days=today.weekday()+1)
         week_dates = [start + timedelta(days=i) for i in range(7)]
+        weekdays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
 
 
-        self.sunday = Day(self, "Sun", week_dates[0].day)
-        self.sunday.pack(side = "left")
+        # the top (day and date) --------------
+        daydateframe = ctk.CTkFrame(master=self, width=wid, height = 50, corner_radius=0)
+        daydateframe.pack(side="top")
+        daydateframe.pack_propagate(False)
+        squareframe = ctk.CTkFrame(daydateframe, width=50, corner_radius=0, fg_color="white") # square top left ------------------
+        squareframe.pack(side="left")
 
-        self.monday = Day(self, "Mon", week_dates[1].day)
-        self.monday.pack(side = "left")
+        daywidth = wid = (self.winfo_screenwidth()-600)/7 # 550 is width of other two sections combined + 50 time
+        for i in range(len(week_dates)):
+            daydate = ctk.CTkLabel(daydateframe, width=daywidth, height = 50, corner_radius=0, font=("Arial", 18), fg_color="white")
+            # daydate.grid(row=0, column=0, sticky="new")
+            daydate.configure(text=str(weekdays[i]) + " " + str(week_dates[i].day))
+            daydate.pack(side="left")
 
-        self.tuesday = Day(self, "Tue", week_dates[2].day)
-        self.tuesday.pack(side = "left")
-
-        self.wednesday = Day(self, "Wed", week_dates[3].day)
-        self.wednesday.pack(side = "left")
         
-        self.thursday = Day(self, "Thu", week_dates[4].day)
-        self.thursday.pack(side = "left")
-
-        self.friday = Day(self, "Fri", week_dates[5].day)
-        self.friday.pack(side = "left")
-
-        self.saturday = Day(self, "Sat", week_dates[6].day)
-        self.saturday.pack(side = "left")
-
-
-
-        self.events_holder = ctk.CTkScrollableFrame(self, width = 500, fg_color = "blue")
+        # SCROLLLLL -----------------------
+        self.events_holder = ctk.CTkScrollableFrame(self, width=wid, fg_color = "blue")
         self.events_holder.pack(fill = "both", expand = True)
+
 
          # time of day ----------------------------
         self.time = ctk.CTkFrame(master=self.events_holder, width=50, height=hei-40, corner_radius=0)
@@ -99,7 +90,7 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="white") # square top left
+        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="white") # square top left ------------------
         squareframe.pack(side="top")
 
         for time in times_list:
@@ -110,6 +101,35 @@ class CalendarSection(ctk.CTkFrame):
             frame.pack_propagate(False)
             label.pack()
         
+
+        # days of week columns cont. -----------------------
+        self.sunday = Day(self.events_holder, "Sun", week_dates[0].day)
+        self.sunday.pack(side = "left")
+
+        self.monday = Day(self.events_holder, "Mon", week_dates[1].day)
+        self.monday.pack(side = "left")
+
+        self.tuesday = Day(self.events_holder, "Tue", week_dates[2].day)
+        self.tuesday.pack(side = "left")
+
+        self.wednesday = Day(self.events_holder, "Wed", week_dates[3].day)
+        self.wednesday.pack(side = "left")
+        
+        self.thursday = Day(self.events_holder, "Thu", week_dates[4].day)
+        self.thursday.pack(side = "left")
+
+        self.friday = Day(self.events_holder, "Fri", week_dates[5].day)
+        self.friday.pack(side = "left")
+
+        self.saturday = Day(self.events_holder, "Sat", week_dates[6].day)
+        self.saturday.pack(side = "left")
+
+
+
+
+
+
         self.grid(row=0, column=1, sticky="ew")
+        self.pack_propagate(False)
         #self.pack(fill = "both", expand = True)
 
