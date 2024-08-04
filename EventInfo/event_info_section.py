@@ -2,6 +2,7 @@ import tkinter
 import customtkinter
 from datetime import datetime
 from Calendar.Event import Event
+from Calendar.Day import Day
 
 class EventInfoSection(customtkinter.CTkFrame):
     def __init__(self, master, calendar, **kwargs):
@@ -10,6 +11,7 @@ class EventInfoSection(customtkinter.CTkFrame):
         self.hei = self.winfo_screenheight()
 
         self.calendar = calendar
+        self.day = Day(self.calendar.wednesday, "temp", "temp")
         self.pack_propagate(0)
         self.input_frame = customtkinter.CTkFrame(self, height=400, bg_color="transparent", fg_color="#c7ccd1")
         self.input_frame.pack(fill="x")
@@ -81,12 +83,8 @@ class EventInfoSection(customtkinter.CTkFrame):
             time_cords = []
             # for frame in self.calendar.time_frame_list:
             #     time_cords.append((frame.winfo_rootx(), frame.winfo_rooty()))
-            for j in range(13):
-                height=(self.hei-90)/26 * j
-                time_cords.append(height)
-            for j in range(11):
-                height=(self.hei-145)/24 * j
-                time_cords.append(height)
+            for frame in self.day.day_list:
+                time_cords.append((frame.winfo_rootx(), frame.winfo_rooty()))
             print("LEN!U!*@&*!", len(time_cords))
             
             if self.am_or_pm.get() == "PM":
@@ -94,9 +92,10 @@ class EventInfoSection(customtkinter.CTkFrame):
             
             print("HOUR", self.hour_input.get())
 
+            print("TIME CORDS: ", time_cords)
             def place_new_event():
-                new_event.place(y=time_cords[int(self.hour_input.get())-1])
-                print("time cord change y value", time_cords[int(self.hour_input.get())][1])
+                new_event.place(y=time_cords[int(self.hour_input.get())-1][1] + 250)
+                print("time cord change y value", time_cords[int(self.hour_input.get())])
                 print("new root", new_event.winfo_rooty())
 
 

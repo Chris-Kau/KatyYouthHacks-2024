@@ -9,6 +9,8 @@ class Day(customtkinter.CTkFrame):
         wid = (self.winfo_screenwidth()-600)/7 # 550 is width of other two sections combined + 50 time
         hei = self.winfo_screenheight()
 
+
+        self.day_list = []
         # the (7) boxes of days ------------------
         self.frame = customtkinter.CTkFrame(self, border_width=1, border_color="gray50")
         # self.frame.configure(text = day)
@@ -38,15 +40,20 @@ class Day(customtkinter.CTkFrame):
         block2 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
         block2.pack(side="top")
         block2.pack_propagate(False)
+
+        def append_hours(hours):
+            self.day_list.append(hours)
         for j in range(13):
             hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0, fg_color="white")
             hours.pack()
+            hours.after(100, append_hours, hours)
         for j in range(11):
             hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0, fg_color="white")
             hours.pack()
+            hours.after(100, append_hours, hours)
 
 
-        self.pack()
+        #self.pack()
 
         # self.day = Event(self, title, time, desc)
         # self.day.pack()
