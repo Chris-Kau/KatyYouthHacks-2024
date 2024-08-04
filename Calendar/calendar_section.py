@@ -3,13 +3,13 @@ import customtkinter as ctk
 from Calendar.Day import Day
 from datetime import datetime, timedelta
 import calendar
-
 class CalendarSection(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         wid = self.winfo_screenwidth()-550 # 550 is width of other two sections combined
         hei = self.winfo_screenheight()
 
+        self.time_frame_list = []
         # month/year -------------
         def get_current_week_months_and_year():
             # Get the current date
@@ -54,12 +54,15 @@ class CalendarSection(ctk.CTkFrame):
         # Create and place labels in the frame
         squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, border_width=0.5) # square top left
         squareframe.pack(side="top")
+
         for time in times_list:
             frame = ctk.CTkFrame(self.time, height=(hei-90)/28, width=50, corner_radius=0, border_width=0.5)
             label = ctk.CTkLabel(frame, text=time, font=("Arial", 12))
+            
             frame.pack(fill = "both", expand = True)
             frame.pack_propagate(False)
             label.pack()
+            self.time_frame_list.append(label)
 
 
 
@@ -78,6 +81,7 @@ class CalendarSection(ctk.CTkFrame):
 
 
         self.sunday = Day(self, "Sun", week_dates[0].day)
+        
         self.sunday.pack(side = "left")
 
         self.monday = Day(self, "Mon", week_dates[1].day)
@@ -88,7 +92,7 @@ class CalendarSection(ctk.CTkFrame):
 
         self.wednesday = Day(self, "Wed", week_dates[3].day)
         self.wednesday.pack(side = "left")
-
+        
         self.thursday = Day(self, "Thu", week_dates[4].day)
         self.thursday.pack(side = "left")
 
@@ -102,6 +106,5 @@ class CalendarSection(ctk.CTkFrame):
         # self.sunday = Day(self, "Homework", "00:00", "DO YOUR HOMEWORK", width = 50, height = 50)
         # self.sunday.pack(padx = 10, pady = 10)
 
-
-        self.pack(fill = "both", expand = True)
+        #self.pack(fill = "both", expand = True)
 
