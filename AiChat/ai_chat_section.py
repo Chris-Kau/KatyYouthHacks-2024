@@ -22,8 +22,9 @@ class AiChatSection(customtkinter.CTkFrame):
     def on_enter_pressed(self, event):
         text = self.usertextbox.get("0.0", "end")
         self.update_text(text, "\nChris")
-        response = self.gpt.chat_with_bot(text)
+        #response = self.gpt.chat_with_bot(text)
         #response = "test_response"
+        response = self.gpt.MakeSchedule(text)
         self.update_text(response, "System")
         self.usertextbox.delete("0.0", "end")
         return "break"

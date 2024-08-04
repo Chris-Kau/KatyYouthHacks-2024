@@ -4,18 +4,21 @@ load_dotenv()
 key = os.getenv("OPENAIKEY")
 import openai
 openai.api_key = key
+from datetime import datetime
 
 
 class GPT():
     def __init__(self):
         super().__init__()
-        self.conversation_history = []
-
+        time = x = datetime.today()
+        day = x.strftime("%A")
+        self.conversation_history = [{"role": "assistant", "content": f"Today's year: {x.year}, Today's day: {day}, Today's day of the month: {x.day}, Today's month: {x.month}"}]
+        print("AHHHHHHHHHHHHHHH", self.conversation_history)
     def MakeSchedule(self, prompt):
         response = openai.ChatCompletion.create(
                 model = "gpt-3.5-turbo",
-                messages=[{"role": "user", "content": prompt},
-                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Your only output should be in the format: (Day, StartTime - EndTime, Event, Event Description). Do not say anything else other than the given format. If the user does not give events only say 'Please provide me with the time of an event and the event description'"}]
+                messages= self.conversation_history + [{"role": "user", "content": prompt},
+                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Your only output should be in the format: (Today's Date, StartTime - EndTime, Event, Event Description). The Calendar Date should be in the format: (Today's Year/Today's Month/Name of today's day/Today's day of the month) Do not say anything else other than the given format."}]
             )
         return response.choices[0].message.content.strip()
 
