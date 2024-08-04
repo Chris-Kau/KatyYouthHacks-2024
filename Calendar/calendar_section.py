@@ -15,8 +15,8 @@ class CalendarSection(ctk.CTkFrame):
             # Get the current date
             today = datetime.today()
             # Calculate the start and end of the current week
-            start_of_week = today - timedelta(days=today.weekday())  # Monday
-            end_of_week = start_of_week + timedelta(days=6)  # Sunday
+            start_of_week = today - timedelta(days=today.weekday()) 
+            end_of_week = start_of_week + timedelta(days=6) 
             # Get months from the start and end of the week
             months = [calendar.month_name[start_of_week.month], calendar.month_name[end_of_week.month]]
             # Get the current year
@@ -35,8 +35,9 @@ class CalendarSection(ctk.CTkFrame):
 
 
         # time of day ----------------------------
-        self.time = ctk.CTkFrame(master=self, width=50, height=hei, corner_radius=0)
+        self.time = ctk.CTkFrame(master=self, width=50, height=hei-40, corner_radius=0)
         self.time.pack(side = "left")
+        self.time.pack_propagate(False)
 
         def get_times_list():
             times = []
@@ -51,11 +52,13 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        label = ctk.CTkLabel(self.time, height=50, text="") # square top left
-        label.pack(side="top")
+        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0) # square top left
+        squareframe.pack(side="top")
         for time in times_list:
-            label = ctk.CTkLabel(self.time, text=time, height=(hei-80)/26)
-            label.pack(fill = "both", expand = True)
+            frame = ctk.CTkFrame(self.time, height=(hei-90)/24, width=50, corner_radius=0, border_width=1)
+            label = ctk.CTkLabel(frame, text=time, font=("Arial", 12))
+            frame.pack(fill = "both", expand = True)
+            label.pack()
 
 
 
