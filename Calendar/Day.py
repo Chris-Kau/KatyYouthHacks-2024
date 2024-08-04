@@ -14,20 +14,17 @@ class Day(customtkinter.CTkFrame):
         # the (7) boxes of days ------------------
         self.frame = customtkinter.CTkFrame(self, border_width=1, border_color="gray50")
         # self.frame.configure(text = day)
-        self.frame.configure(width=wid, height=hei-40)
+        self.frame.configure(width=wid, height=800)
         self.frame.grid(row=0, column=0, padx=0, pady=0) 
         self.frame.pack_propagate(False)
         # self.frame.pack(side = "bottom")
         
 
-        # the top (day and date) --------------
-        # moved line 54 calendar_section
-
-        # # the hours -----------------------------
-        # block = customtkinter.CTkFrame(self.frame, height=50, fg_color="red", bg_color="red") # CORRECTLY covering the part thats the day titling
-        # block.pack(side="top") 
-        # block = customtkinter.CTkFrame(self.frame, height=55, fg_color="red", bg_color="red") # covering the bottom???
-        # block.pack(side="bottom") 
+        # the hours -----------------------------
+        for i in range(2):
+            for j in range(12):
+                hours = customtkinter.CTkFrame(self.frame, height=800/24, border_width=0.5, border_color="gray80", corner_radius=0)
+                hours.pack()
 
         # # -90 gives line almost exact between 12 and 1, -155 gives 11 and 12 (correct). 153 too
         # block1 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
@@ -48,7 +45,11 @@ class Day(customtkinter.CTkFrame):
         #     hours.pack()
 
 
-        #self.pack()
+        self.pack()
+
+
+
+
 
         # self.day = Event(self, title, time, desc)
         # self.day.pack()

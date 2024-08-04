@@ -70,12 +70,11 @@ class CalendarSection(ctk.CTkFrame):
 
         
         # SCROLLLLL -----------------------
-        self.events_holder = ctk.CTkScrollableFrame(self, width=wid, height=650, fg_color = "gray80")
+        self.events_holder = ctk.CTkScrollableFrame(self, width=wid, height=800, fg_color = "gray80")
         self.events_holder.pack(side="top", fill = "both", expand = True)
 
-
-         # time of day ----------------------------
-        self.time = ctk.CTkFrame(master=self.events_holder, width=50, height=hei-40, corner_radius=0)
+        # time of day ----------------------------
+        self.time = ctk.CTkFrame(master=self.events_holder, width=50, height=800, corner_radius=0)
         self.time.pack(side = "left")
         self.time.pack_propagate(False)
 
@@ -93,7 +92,7 @@ class CalendarSection(ctk.CTkFrame):
         times_list = get_times_list()
         # Create and place labels in the frame
         for time in times_list:
-            frame = ctk.CTkFrame(self.time, height=(hei-90)/28, width=50, corner_radius=0, border_width=0.5, fg_color="#f2f2f2")
+            frame = ctk.CTkFrame(self.time, height=800/24, width=50, corner_radius=0, border_width=0.5, fg_color="#f2f2f2")
             label = ctk.CTkLabel(frame, text=time, font=("Arial", 12))
             
             frame.pack(fill = "both", expand = True)
