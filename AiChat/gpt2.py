@@ -24,7 +24,7 @@ class GPT():
         response = openai.ChatCompletion.create(
                 model = "gpt-3.5-turbo",
                 messages= self.conversation_history + [{"role": "user", "content": prompt},
-                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Be friendly and try not to go off topic. If the user asks to recall something from the past, you have the conversation history. Please use today's year, month, and day"}]
+                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Be friendly and try not to go off topic. If the user asks to recall something from the past, you have the conversation history. Please use today's year, month, and day. Give a Start time in AM or PM for each event. Do not provide an endtime, only a start time."}]
             )
         self.conversation_history.append({"role": "assistant", "content": response.choices[0].message.content.strip()})
         return response.choices[0].message.content.strip()
