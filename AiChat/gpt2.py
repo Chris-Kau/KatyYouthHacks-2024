@@ -2,10 +2,18 @@ import os
 from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 key = os.getenv("OPENAIKEY")
+mongodbui = os.getenv("PYMONGOUURI")
 import openai
 openai.api_key = key
 from datetime import datetime
-
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+client = MongoClient(mongodbui, server_api=ServerApi('1'))
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 class GPT():
     def __init__(self):
@@ -13,7 +21,6 @@ class GPT():
         time = x = datetime.today()
         day = x.strftime("%A")
         self.conversation_history = [{"role": "assistant", "content": f"Today's year: {x.year}, Today's day: {day}, Today's day of the month: {x.day}, Today's month: {x.month}"}]
-        print("AHHHHHHHHHHHHHHH", self.conversation_history)
     def MakeSchedule(self, prompt):
         response = openai.ChatCompletion.create(
                 model = "gpt-3.5-turbo",
@@ -27,7 +34,7 @@ class GPT():
         response = openai.ChatCompletion.create(
                 model = "gpt-3.5-turbo",
                 messages= self.conversation_history + [{"role": "user", "content": prompt},
-                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Be friendly and try not to go off topic. If the user asks to recall something from the past, you have the conversation history"}]
+                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Be friendly and try not to go off topic. If the user asks to recall something from the past, you have the conversation history. Please use today's year, month, and day"}]
             )
         self.conversation_history.append({"role": "assistant", "content": response.choices[0].message.content.strip()})
         return response.choices[0].message.content.strip()

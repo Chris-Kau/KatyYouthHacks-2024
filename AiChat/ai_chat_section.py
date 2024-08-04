@@ -1,6 +1,10 @@
 import tkinter
+import pymongo
 import customtkinter
 from AiChat.gpt2 import GPT
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+client = MongoClient("mongodb+srv://KatyYouthHacks:KatyYouthHacks123@aicalendar.cpwbw6l.mongodb.net/?retryWrites=true&w=majority&appName=AICalendar ")
 class AiChatSection(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -22,9 +26,9 @@ class AiChatSection(customtkinter.CTkFrame):
     def on_enter_pressed(self, event):
         text = self.usertextbox.get("0.0", "end")
         self.update_text(text, "\nChris")
-        #response = self.gpt.chat_with_bot(text)
+        response = self.gpt.chat_with_bot(text)
         #response = "test_response"
-        response = self.gpt.MakeSchedule(text)
+        #response = self.gpt.MakeSchedule(text)
         self.update_text(response, "System")
         self.usertextbox.delete("0.0", "end")
         return "break"
