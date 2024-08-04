@@ -8,6 +8,7 @@ class Event(customtkinter.CTkTextbox):
         self.insert("1.0", title + " ") #insert at line 0, character 0
         self.insert("2.0", time + "\n") 
         self.insert("3.0", description + "\n")
-        self.pack()
-
+        #self.pack()
+        self.configure(state = "disabled")
+        self.grid(row=0, column=0, padx=5, pady=5)
 
