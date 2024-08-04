@@ -48,7 +48,6 @@ class CalendarSection(ctk.CTkFrame):
         print(start)
         today = datetime.now().date()
         start = today - timedelta(days=today.weekday()+1)
-        week_dates = [start + timedelta(days=i) for i in range(7)]
         weekdays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
 
 
