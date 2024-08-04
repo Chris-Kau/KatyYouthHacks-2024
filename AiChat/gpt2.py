@@ -9,7 +9,8 @@ openai.api_key = key
 class GPT():
     def __init__(self):
         super().__init__()
-    
+        self.conversation_history = []
+
     def MakeSchedule(self, prompt):
         response = openai.ChatCompletion.create(
                 model = "gpt-3.5-turbo",
@@ -18,13 +19,22 @@ class GPT():
             )
         return response.choices[0].message.content.strip()
 
+    def chat_with_bot(self, prompt):
+        self.conversation_history.append({"role": "user", "content": prompt})
+        response = openai.ChatCompletion.create(
+                model = "gpt-3.5-turbo",
+                messages= self.conversation_history + [{"role": "user", "content": prompt},
+                        {"role": "system", "content": "You are to help the user with organizing their events into their weekly schedule so everything is not crammed.Preferrably, you should not have the same or similar event on the same day if that event is more than 3 hours, unless told otherwise by the user. The week starts on Sundays and ends on Saturdays. Be friendly and try not to go off topic. If the user asks to recall something from the past, you have the conversation history"}]
+            )
+        self.conversation_history.append({"role": "assistant", "content": response.choices[0].message.content.strip()})
+        return response.choices[0].message.content.strip()
 
 
-if __name__ == "__main__":
-    gpt = GPT()
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() in ["quit", "exit"]:
-            break
-        response = gpt.MakeSchedule(user_input)
-        print("Chat bot:", response)
+# if __name__ == "__main__":
+#     gpt = GPT()
+#     while True:
+#         user_input = input("You: ")
+#         if user_input.lower() in ["quit", "exit"]:
+#             break
+#         response = gpt.MakeSchedule(user_input)
+#         print("Chat bot:", response)
