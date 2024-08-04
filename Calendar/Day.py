@@ -23,27 +23,8 @@ class Day(customtkinter.CTkFrame):
         # the hours -----------------------------
         for i in range(2):
             for j in range(12):
-                hours = customtkinter.CTkFrame(self.frame, height=800/24, border_width=0.5, border_color="gray80", corner_radius=0)
+                hours = customtkinter.CTkFrame(self.frame, height=800/24, border_width=0.7, fg_color="white", border_color="gray90", corner_radius=0)
                 hours.pack()
-
-        # # -90 gives line almost exact between 12 and 1, -155 gives 11 and 12 (correct). 153 too
-        # block1 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
-        # block1.pack(side="top")
-        # block1.pack_propagate(False)
-        # block2 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
-        # block2.pack(side="top")
-        # block2.pack_propagate(False)
-
-        # def append_hours(hours):
-        #     self.day_list.append(hours)
-        # for j in range(13):
-        #     hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0)
-        #     hours.pack()
-        #     hours.after(100, append_hours, hours)
-        # for j in range(11):
-        #     hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0)
-        #     hours.pack()
-
 
         self.pack()
 
