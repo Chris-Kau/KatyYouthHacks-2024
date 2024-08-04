@@ -1,7 +1,7 @@
 import tkinter
 import customtkinter
 from datetime import datetime
-# from Calendar.Event import Event
+from Calendar.Event import Event
 from mongodbclass import DBEvent, DBDay, find_days
 
 
@@ -86,6 +86,10 @@ class EventInfoSection(customtkinter.CTkFrame):
         
 
         print("success")
+
+        self.new_event = Event(self.calendar.wednesday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
+        self.new_event.grid(row=0, column=0, padx=5, pady=5)
+
         found_day = find_days(event_date)
         if found_day:
             print("bleh")
@@ -99,4 +103,7 @@ class EventInfoSection(customtkinter.CTkFrame):
         new_event = DBEvent(self.name_input.get(), self.note_input.get(), int(self.hour_input.get()), int(self.minute_input.get()))
         new_day.add_event(new_event)
         new_day.save()
+
+
+
 
