@@ -2,6 +2,7 @@ import tkinter
 import customtkinter
 from datetime import datetime
 from Calendar.Event import Event
+from Calendar.Day import Day
 from mongodbclass import DBEvent, DBDay, find_days
 
 
@@ -81,15 +82,83 @@ class EventInfoSection(customtkinter.CTkFrame):
         if not valid_name or not valid_note or not valid_date:
             return
 
-        if self.am_or_pm == "PM":
-            self.hour_input = str(int(self.hour_input) + 12)
-        
+
+        #self.calendar.wednesday.hours_locations
 
         print("success")
+        pm_or_am = 0
+        if self.am_or_pm.get() == "PM":
+            pm_or_am = 1
 
-        self.new_event = Event(self.calendar.wednesday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-        self.new_event.grid(row=0, column=0, padx=5, pady=5)
-
+        
+        print("HOUR INDEX", int(self.hour_input.get()))
+        def place_event(event, newy):
+            event.place(y=newy)
+        day_name = event_date.strftime("%A").lower()
+        if day_name == "sunday":
+            pmlist = self.calendar.sunday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.sunday.hours_locations[:12]
+            amlist.append(amlist[0])
+            sunday_list = [amlist,pmlist]
+            sunday_list = sunday_list[pm_or_am]
+            self.new_event = Event(sunday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)      
+        elif day_name == "monday":
+            pmlist = self.calendar.monday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.monday.hours_locations[:12]
+            amlist.append(amlist[0])
+            monday_list = [amlist,pmlist]
+            monday_list = monday_list[pm_or_am]
+            self.new_event = Event(monday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)      
+        elif day_name == "tuesday":
+            pmlist = self.calendar.tuesday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.tuesday.hours_locations[:12]
+            amlist.append(amlist[0])
+            tuesday_list = [amlist,pmlist]
+            tuesday_list = tuesday_list[pm_or_am]
+            self.new_event = Event(tuesday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)      
+        elif day_name == "wednesday":
+            pmlist = self.calendar.wednesday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.wednesday.hours_locations[:12]
+            amlist.append(amlist[0])
+            wednesday_list = [amlist,pmlist]
+            wednesday_list = wednesday_list[pm_or_am]
+            self.new_event = Event(wednesday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)
+            #self.new_event.after(100, place_event, self.new_event,temp_loc[int(self.hour_input.get())][1])
+        elif day_name == "thursday":
+            pmlist = self.calendar.thursday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.thursday.hours_locations[:12]
+            amlist.append(amlist[0])
+            thursday_list = [amlist,pmlist]
+            thursday_list = thursday_list[pm_or_am]
+            self.new_event = Event(thursday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)
+        elif day_name == "friday":
+            pmlist = self.calendar.friday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.friday.hours_locations[:12]
+            amlist.append(amlist[0])
+            friday_list = [amlist,pmlist]
+            friday_list = friday_list[pm_or_am]
+            self.new_event = Event(friday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)
+        elif day_name == "saturday":
+            pmlist = self.calendar.saturday.hours_locations[12:]
+            pmlist.append(pmlist[0])
+            amlist = self.calendar.saturday.hours_locations[:12]
+            amlist.append(amlist[0])
+            saturday_list = [amlist,pmlist]
+            saturday_list = saturday_list[pm_or_am]
+            self.new_event = Event(saturday_list[int(self.hour_input.get())], self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 100, height = 800/24)
+            self.new_event.grid(row=0, column=0)        
         found_day = find_days(event_date)
         if found_day:
             print("bleh")

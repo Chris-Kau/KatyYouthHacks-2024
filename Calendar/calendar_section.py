@@ -10,7 +10,7 @@ class CalendarSection(ctk.CTkFrame):
         hei = self.winfo_screenheight()
 
         self.configure(width = 500)
-
+        self.label_locations = []
         # month/year -------------
         def get_current_week_months_and_year():
             # Get the current date
@@ -98,6 +98,7 @@ class CalendarSection(ctk.CTkFrame):
             frame.pack(fill = "both", expand = True)
             frame.pack_propagate(False)
             label.pack()
+            self.label_locations.append(frame)
         
 
         # days of week columns cont. -----------------------
