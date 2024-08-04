@@ -2,9 +2,9 @@ import tkinter
 import pymongo
 import customtkinter
 from AiChat.gpt2 import GPT
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-client = MongoClient("mongodb+srv://KatyYouthHacks:KatyYouthHacks123@aicalendar.cpwbw6l.mongodb.net/?retryWrites=true&w=majority&appName=AICalendar ")
+
+
+
 class AiChatSection(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)

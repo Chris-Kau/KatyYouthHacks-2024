@@ -2,19 +2,9 @@ import os
 from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 key = os.getenv("OPENAIKEY")
-mongodbui = os.getenv("PYMONGOUURI")
 import openai
 openai.api_key = key
 from datetime import datetime
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-client = MongoClient(mongodbui, server_api=ServerApi('1'))
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print(e)
-
 class GPT():
     def __init__(self):
         super().__init__()
