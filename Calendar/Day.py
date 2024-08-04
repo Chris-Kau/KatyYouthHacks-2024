@@ -27,30 +27,29 @@ class Day(customtkinter.CTkFrame):
         self.label.grid(row=0, column=0, sticky="new") # sticky = nsew
         self.label.configure(text=str(day) + " " + str(date))
 
-        # the hours -----------------------------
-        block = customtkinter.CTkFrame(self.frame, height=50, fg_color="red", bg_color="red") # CORRECTLY covering the part thats the day titling
-        block.pack(side="top") 
-        block = customtkinter.CTkFrame(self.frame, height=55, fg_color="red", bg_color="red") # covering the bottom???
-        block.pack(side="bottom") 
+        # # the hours -----------------------------
+        # block = customtkinter.CTkFrame(self.frame, height=50, fg_color="red", bg_color="red") # CORRECTLY covering the part thats the day titling
+        # block.pack(side="top") 
+        # block = customtkinter.CTkFrame(self.frame, height=55, fg_color="red", bg_color="red") # covering the bottom???
+        # block.pack(side="bottom") 
 
-        # -90 gives line almost exact between 12 and 1, -155 gives 11 and 12 (correct). 153 too
-        block1 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
-        block1.pack(side="top")
-        block1.pack_propagate(False)
-        block2 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
-        block2.pack(side="top")
-        block2.pack_propagate(False)
+        # # -90 gives line almost exact between 12 and 1, -155 gives 11 and 12 (correct). 153 too
+        # block1 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
+        # block1.pack(side="top")
+        # block1.pack_propagate(False)
+        # block2 = customtkinter.CTkFrame(self.frame, height=(hei-90)/2, corner_radius=0, fg_color="gray80", border_width=0)
+        # block2.pack(side="top")
+        # block2.pack_propagate(False)
 
-        def append_hours(hours):
-            self.day_list.append(hours)
-        for j in range(13):
-            hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0, fg_color="white")
-            hours.pack()
-            hours.after(100, append_hours, hours)
-        for j in range(11):
-            hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0, fg_color="white")
-            hours.pack()
-            hours.after(100, append_hours, hours)
+        # def append_hours(hours):
+        #     self.day_list.append(hours)
+        # for j in range(13):
+        #     hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0)
+        #     hours.pack()
+        #     hours.after(100, append_hours, hours)
+        # for j in range(11):
+        #     hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0)
+        #     hours.pack()
 
 
         #self.pack()

@@ -9,7 +9,8 @@ class CalendarSection(ctk.CTkFrame):
         wid = self.winfo_screenwidth()-550 # 550 is width of other two sections combined
         hei = self.winfo_screenheight()
 
-        self.time_frame_list = []
+        self.configure(width = 500)
+
         # month/year -------------
         def get_current_week_months_and_year():
             # Get the current date
@@ -38,6 +39,50 @@ class CalendarSection(ctk.CTkFrame):
 
         # time of day ----------------------------
         self.time = ctk.CTkFrame(master=self, width=50, height=hei-40, corner_radius=0)
+      
+
+        # days of week ----------------
+        today = datetime.today()
+        if today.weekday() == 6:  # if today is Sunday
+            start = today
+        else:
+            start = today - timedelta(days=today.weekday() + 1)
+        week_dates = [start + timedelta(days=i) for i in range(7)]
+        print(today)
+        print(start)
+        today = datetime.now().date()
+        start = today - timedelta(days=today.weekday()+1)
+        week_dates = [start + timedelta(days=i) for i in range(7)]
+
+
+        self.sunday = Day(self, "Sun", week_dates[0].day)
+        self.sunday.pack(side = "left")
+
+        self.monday = Day(self, "Mon", week_dates[1].day)
+        self.monday.pack(side = "left")
+
+        self.tuesday = Day(self, "Tue", week_dates[2].day)
+        self.tuesday.pack(side = "left")
+
+        self.wednesday = Day(self, "Wed", week_dates[3].day)
+        self.wednesday.pack(side = "left")
+        
+        self.thursday = Day(self, "Thu", week_dates[4].day)
+        self.thursday.pack(side = "left")
+
+        self.friday = Day(self, "Fri", week_dates[5].day)
+        self.friday.pack(side = "left")
+
+        self.saturday = Day(self, "Sat", week_dates[6].day)
+        self.saturday.pack(side = "left")
+
+
+
+        self.events_holder = ctk.CTkScrollableFrame(self, width = 500, fg_color = "blue")
+        self.events_holder.pack(fill = "both", expand = True)
+
+         # time of day ----------------------------
+        self.time = ctk.CTkFrame(master=self.events_holder, width=50, height=hei-40, corner_radius=0)
         self.time.pack(side = "left")
         self.time.pack_propagate(False)
 
@@ -64,50 +109,7 @@ class CalendarSection(ctk.CTkFrame):
             frame.pack(fill = "both", expand = True)
             frame.pack_propagate(False)
             label.pack()
-            self.time_frame_list.append(label)
-
-
-
         
-        # days of week ----------------
-        today = datetime.today()
-        if today.weekday() == 6:  # if today is Sunday
-            start = today
-        else:
-            start = today - timedelta(days=today.weekday() + 1)
-        week_dates = [start + timedelta(days=i) for i in range(7)]
-        print(today)
-        print(start)
-
-        # for date in week_dates:
-            # print(date.day)
-            # print(date.strftime('%d'))
-        # print(week_dates[0].day)
-
-        self.sunday = Day(self, "Sun", week_dates[0].day)
-        self.sunday.pack(side = "left")
-
-        self.monday = Day(self, "Mon", week_dates[1].day)
-        self.monday.pack(side = "left")
-
-        self.tuesday = Day(self, "Tue", week_dates[2].day)
-        self.tuesday.pack(side = "left")
-
-        self.wednesday = Day(self, "Wed", week_dates[3].day)
-        self.wednesday.pack(side = "left")
-        
-        self.thursday = Day(self, "Thu", week_dates[4].day)
-        self.thursday.pack(side = "left")
-
-        self.friday = Day(self, "Fri", week_dates[5].day)
-        self.friday.pack(side = "left")
-
-        self.saturday = Day(self, "Sat", week_dates[6].day)
-        self.saturday.pack(side = "left")
-
-
-        # self.sunday = Day(self, "Homework", "00:00", "DO YOUR HOMEWORK", width = 50, height = 50)
-        # self.sunday.pack(padx = 10, pady = 10)
-
+        self.grid(row=0, column=1, sticky="ew")
         #self.pack(fill = "both", expand = True)
 
