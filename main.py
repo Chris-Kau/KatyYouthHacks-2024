@@ -18,7 +18,7 @@ class App(customtkinter.CTk):
         self.event_info_section = EventInfoSection(master = self, width = 250, fg_color="blue")
         self.event_info_section.pack(side = "left", fill = "both")
 
-        self.calendar_section = CalendarSection(master = self, fg_color= "green")
+        self.calendar_section = CalendarSection(master = self, fg_color= "green", corner_radius=0)
         self.calendar_section.pack(fill = "both", expand = True)
 
 app = App()
