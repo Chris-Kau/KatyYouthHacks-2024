@@ -1,8 +1,9 @@
 import tkinter
 import customtkinter
 from datetime import datetime
-from Calendar.Event import Event
-from Calendar.Day import Day
+# from Calendar.Event import Event
+from mongodbclass import DBEvent, DBDay, find_days
+
 
 class EventInfoSection(customtkinter.CTkFrame):
     def __init__(self, master, calendar, **kwargs):
@@ -59,44 +60,43 @@ class EventInfoSection(customtkinter.CTkFrame):
 
     def create_event(self):
         print("pressed")
+        valid_name = True
+        valid_note = True
+        valid_date = True
         if self.name_input.get() == "":
             self.name_input.configure(placeholder_text="Must include a name!!!", placeholder_text_color="red")
+            valid_name = False
 
         if len(self.note_input.get()) > 50:
             self.note_input.configure(placeholder_text="There is a 50 character limit", placeholder_text_color="red")
+            valid_note = False
 
         try:
             event_date = datetime.strptime(self.date_input.get(), "%m/%d/%y")
         except ValueError:
             self.date_input.delete(0, "end")
             self.date_input.configure(placeholder_text="Must be a valid date in format mm/dd/yy", placeholder_text_color="red")
-        else:
-            print("success")
-            # print(self.name_input.get())
-            # print(self.note_input.get())
-            # print(event_date)
-            # print(self.hour_input.get())
-            # print(self.minute_input.get())
-            day = str(event_date.strftime("%A")).lower()
-            # if(day == "monday"):
-            #     new_event = Event(self.calendar.monday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "tuesday"):
-            #     new_event = Event(self.calendar.tuesday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "wednesday"):
-            #     new_event = Event(self.calendar.wednesday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get(), width = 80, height = 20)
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "thursday"):
-            #     new_event = Event(self.calendar.thursday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "friday"):
-            #     new_event = Event(self.calendar.friday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "saturday"):
-            #     new_event = Event(self.calendar.saturday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            # elif(day == "sunday"):
-            #     new_event = Event(self.calendar.sunday, self.name_input.get(), f"{self.hour_input.get()}:{self.minute_input.get()}", self.note_input.get())
-            #     new_event.grid(row=0, column=0, padx=5, pady=5)
-            
+            valid_date = False
+        
+        if not valid_name or not valid_note or not valid_date:
+            return
+
+        if self.am_or_pm == "PM":
+            self.hour_input = str(int(self.hour_input) + 12)
+        
+
+        print("success")
+        found_day = find_days(event_date)
+        if found_day:
+            print("bleh")
+            new_event = DBEvent(self.name_input.get(), self.note_input.get(), int(self.hour_input.get()), int(self.minute_input.get()))
+            found_day.add_event(new_event)
+            found_day.save()
+            return
+        
+        new_day = DBDay(event_date)
+        new_day.save()    
+        new_event = DBEvent(self.name_input.get(), self.note_input.get(), int(self.hour_input.get()), int(self.minute_input.get()))
+        new_day.add_event(new_event)
+        new_day.save()
+
