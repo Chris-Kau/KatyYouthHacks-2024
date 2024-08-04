@@ -52,11 +52,11 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, border_width=0.5) # square top left
+        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="gray85") # square top left
         squareframe.pack(side="top")
 
         for time in times_list:
-            frame = ctk.CTkFrame(self.time, height=(hei-90)/28, width=50, corner_radius=0, border_width=0.5)
+            frame = ctk.CTkFrame(self.time, height=(hei-90)/28, width=50, corner_radius=0, border_width=0.5, fg_color="#f2f2f2")
             label = ctk.CTkLabel(frame, text=time, font=("Arial", 12))
             
             frame.pack(fill = "both", expand = True)

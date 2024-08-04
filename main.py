@@ -31,7 +31,7 @@ class App(customtkinter.CTk):
         self.calendar_section = CalendarSection(master=self, fg_color="green", corner_radius=0)
         self.calendar_section.grid(row=0, column=1, sticky="nsew")
 
-        self.event_info_section = EventInfoSection(master=self, calendar=self.calendar_section, width=250, fg_color="blue")
+        self.event_info_section = EventInfoSection(master=self, calendar=self.calendar_section, width=250, fg_color="#dedfe0")
         self.event_info_section.grid(row=0, column=0, sticky="ns")
 
 

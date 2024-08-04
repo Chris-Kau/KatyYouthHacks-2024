@@ -39,10 +39,10 @@ class Day(customtkinter.CTkFrame):
         block2.pack(side="top")
         block2.pack_propagate(False)
         for j in range(13):
-            hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0)
+            hours = customtkinter.CTkFrame(block1, height=(hei-90)/26, border_width=0.8, border_color="gray80", corner_radius=0, fg_color="white")
             hours.pack()
         for j in range(11):
-            hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0)
+            hours = customtkinter.CTkFrame(block2, height=(hei-145)/24, border_width=0.7, border_color="gray80", corner_radius=0, fg_color="white")
             hours.pack()
 
 

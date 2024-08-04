@@ -11,7 +11,7 @@ class EventInfoSection(customtkinter.CTkFrame):
 
         self.calendar = calendar
         self.pack_propagate(0)
-        self.input_frame = customtkinter.CTkFrame(self, height=400, bg_color="transparent", fg_color="green")
+        self.input_frame = customtkinter.CTkFrame(self, height=400, bg_color="transparent", fg_color="#c7ccd1")
         self.input_frame.pack(fill="x")
 
         self.name_frame = customtkinter.CTkFrame(self.input_frame, fg_color="transparent", height=100)
