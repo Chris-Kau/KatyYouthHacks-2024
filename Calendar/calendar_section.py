@@ -18,12 +18,14 @@ class CalendarSection(ctk.CTkFrame):
             start_of_week = today - timedelta(days=today.weekday())  # Monday
             end_of_week = start_of_week + timedelta(days=6)  # Sunday
             # Get months from the start and end of the week
-            months = {calendar.month_name[start_of_week.month], calendar.month_name[end_of_week.month]}
+            months = [calendar.month_name[start_of_week.month], calendar.month_name[end_of_week.month]]
             # Get the current year
             current_year = today.year
-            return sorted(months), current_year
+            return months, current_year
         months, year = get_current_week_months_and_year()
         monthsstr = '-'.join(months)
+        print(months)
+        print(monthsstr)
 
         self.monthyr = ctk.CTkFrame(master=self, height=40)
         self.monthyr.pack(side="top", fill = "both", expand = True)
@@ -63,12 +65,12 @@ class CalendarSection(ctk.CTkFrame):
         today = datetime.now().date()
         start = today - timedelta(days=today.weekday()+1)
         week_dates = [start + timedelta(days=i) for i in range(7)]
-        print(week_dates)
+        # print(week_dates)
 
-        for date in week_dates:
-            print(date.day)
+        # for date in week_dates:
+            # print(date.day)
             # print(date.strftime('%d'))
-        print(week_dates[0].day)
+        # print(week_dates[0].day)
 
 
         self.sunday = Day(self, "Sun", week_dates[0].day)
