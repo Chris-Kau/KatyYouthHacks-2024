@@ -34,8 +34,7 @@ class App(customtkinter.CTk):
         self.event_info_section = EventInfoSection(master=self, calendar=self.calendar_section, width=250, fg_color="#dedfe0")
         self.event_info_section.grid(row=0, column=0, sticky="ns")
 
-
-        self.ai_chat_section = AiChatSection(master=self, width=300, height=1000, fg_color="#adadad")
+        self.ai_chat_section = AiChatSection(master=self, width=300, height=1000, fg_color="#abb8c7")
         self.ai_chat_section.grid(row=0, column=2, sticky="ns")
 app = App()
 app.mainloop()

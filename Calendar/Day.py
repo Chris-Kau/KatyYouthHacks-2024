@@ -22,7 +22,7 @@ class Day(customtkinter.CTkFrame):
 
         # the top (day and date) --------------
         # self.textbox = customtkinter.CTkTextbox(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 16))
-        self.label = customtkinter.CTkLabel(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 18))
+        self.label = customtkinter.CTkLabel(master=self, width=1, height = 50, corner_radius=0, font=("Arial", 18), fg_color="white")
 
         self.label.grid(row=0, column=0, sticky="new") # sticky = nsew
         self.label.configure(text=str(day) + " " + str(date))

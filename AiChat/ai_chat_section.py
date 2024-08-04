@@ -11,7 +11,7 @@ class AiChatSection(customtkinter.CTkFrame):
         self.pack_propagate(False)
         #self.pack(side = "right", fill = "both", expand = True)
         self.gpt = GPT()
-        self.usertextbox = customtkinter.CTkTextbox(self, width = 250, height = 100, corner_radius = 10, border_color = "black", fg_color = "transparent", border_width = 2)
+        self.usertextbox = customtkinter.CTkTextbox(self, width = 280, height = 180, corner_radius = 10, border_color = "white", fg_color="#ebeff2", border_width = 3)
         self.usertextbox.bind("<Return>", self.on_enter_pressed)
         self.usertextbox.pack(side = "bottom", pady = 10)
 

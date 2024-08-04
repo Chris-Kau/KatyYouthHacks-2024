@@ -32,9 +32,8 @@ class CalendarSection(ctk.CTkFrame):
 
         self.monthyr = ctk.CTkFrame(master=self, height=40)
         self.monthyr.pack(side="top", fill = "both", expand = True)
-        myLbl = ctk.CTkLabel(self.monthyr, text=monthsstr + " " + str(year), width=wid, font=("Arial", 20))
+        myLbl = ctk.CTkLabel(self.monthyr, text=monthsstr + " " + str(year), width=wid, font=("Arial", 20), fg_color="white")
         myLbl.pack(fill = "both", expand = True)
-
 
 
         # time of day ----------------------------
@@ -55,7 +54,7 @@ class CalendarSection(ctk.CTkFrame):
         
         times_list = get_times_list()
         # Create and place labels in the frame
-        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="gray85") # square top left
+        squareframe = ctk.CTkFrame(self.time, height=50, corner_radius=0, fg_color="white") # square top left
         squareframe.pack(side="top")
 
         for time in times_list:
@@ -79,16 +78,13 @@ class CalendarSection(ctk.CTkFrame):
         week_dates = [start + timedelta(days=i) for i in range(7)]
         print(today)
         print(start)
-        # print(week_dates)
 
         # for date in week_dates:
             # print(date.day)
             # print(date.strftime('%d'))
         # print(week_dates[0].day)
 
-
         self.sunday = Day(self, "Sun", week_dates[0].day)
-        
         self.sunday.pack(side = "left")
 
         self.monday = Day(self, "Mon", week_dates[1].day)
