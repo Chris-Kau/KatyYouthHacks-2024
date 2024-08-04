@@ -15,8 +15,11 @@ class CalendarSection(ctk.CTkFrame):
             # Get the current date
             today = datetime.today()
             # Calculate the start and end of the current week
-            start_of_week = today - timedelta(days=today.weekday()) 
-            end_of_week = start_of_week + timedelta(days=6) 
+            if today.weekday() == 6:  # If today is Sunday
+                start_of_week = today
+            else:
+                start_of_week = today - timedelta(days=today.weekday() + 1)
+            end_of_week = start_of_week + timedelta(days=6)
             # Get months from the start and end of the week
             months = [calendar.month_name[start_of_week.month], calendar.month_name[end_of_week.month]]
             # Get the current year
@@ -68,10 +71,14 @@ class CalendarSection(ctk.CTkFrame):
 
         
         # days of week ----------------
-
-        today = datetime.now().date()
-        start = today - timedelta(days=today.weekday()+1)
+        today = datetime.today()
+        if today.weekday() == 6:  # if today is Sunday
+            start = today
+        else:
+            start = today - timedelta(days=today.weekday() + 1)
         week_dates = [start + timedelta(days=i) for i in range(7)]
+        print(today)
+        print(start)
         # print(week_dates)
 
         # for date in week_dates:
